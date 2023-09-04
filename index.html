@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page of Ecommerce Website</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h2>Admin Page Of E Commerce Website</h2>
+    <form onsubmit="saveToStorage(event)">
+    <label for="sellPrice">Selling Price</label>
+    <input type="number" id="sellPrice" name="sellingprice">
+    <label for="prodName">Product Name</label>
+    <input type="text" id="prodName" name="productName">
+    <label for="category">Choose a Category</label>
+<select id="category" name="categ">
+  <option>Electronic Items</option>
+  <option>Food Items</option>
+  <option>Skincare Items</option>
+</select>
+<input type="submit" value="ADD PRODUCT" style="font-weight: bold;">
+    </form>
+    <h3 style="color: red;">Products</h3>
+    <h4>Electronic Items</h4>
+    <ul id="ul1"></ul>
+    <h4>Food Items</h4>
+    <ul id="ul2"></ul>
+    <h4>Skincare Items</h4>
+    <ul id="ul3"></ul>
+    <script>
+        function saveToStorage(event){
+            event.preventDefault();
+            
+            let sellingPrice = event.target.sellingprice.value;
+            let productName = event.target.productName.value;
+            let category = event.target.categ.value;
+
+            let obj = {
+                SellingPrice : sellingPrice,
+                ProductName : productName,
+                Category : category
+            }
+
+            localStorage.setItem(productName,JSON.stringify(obj));
+            axios.post('https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage',obj)
+            .then((res)=>{
+                console.log(res);
+            }).catch((err)=>{
+                console.log(err);
+            })
+
+            showOnScreen(obj);
+        }
+
+        window.addEventListener("DOMContentLoaded",()=>{
+            axios.get('https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage')
+            .then((res)=>{
+                for(let i=0;i<res.data.length;i++){
+                    showOnScreen(res.data[i]);
+                }
+            })
+        })
+
+        function showOnScreen(obj){
+            if(obj.Category == "Electronic Items"){
+                let ul1 = document.getElementById('ul1');
+                let li = document.createElement('li');
+                let text = document.createTextNode(`${obj.SellingPrice} --- ${obj.ProductName}---${obj.Category}`);
+
+                let delBtn = document.createElement('input');
+                delBtn.type = 'button';
+                delBtn.style = 'width : 70px ; font-weight:bold'
+                delBtn.value = 'DELETE'
+
+                li.appendChild(text);
+                li.appendChild(delBtn);
+                ul1.appendChild(li);
+
+                delBtn.addEventListener("click",()=>{
+                    axios.delete(`https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage/${obj._id}`)
+                    .then((res)=>{
+                        console.log(res);
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                    ul1.removeChild(li);
+                });
+            }
+            else if(obj.Category == "Food Items"){
+                let ul1 = document.getElementById('ul2');
+                let li = document.createElement('li');
+                let text = document.createTextNode(`${obj.SellingPrice} --- ${obj.ProductName}---${obj.Category}`);
+                
+                let delBtn = document.createElement('input');
+                delBtn.type = 'button';
+                delBtn.style = 'width : 70px ; font-weight:bold'
+                delBtn.value = 'DELETE'
+
+                li.appendChild(text);
+                li.appendChild(delBtn);
+                ul1.appendChild(li);
+
+                delBtn.addEventListener("click",()=>{
+                    axios.delete(`https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage/${obj._id}`)
+                    .then((res)=>{
+                        console.log(res);
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                    ul2.removeChild(li);
+                });
+            }
+            else{
+                let ul1 = document.getElementById('ul3');
+                let li = document.createElement('li');
+                let text = document.createTextNode(`${obj.SellingPrice} --- ${obj.ProductName}---${obj.Category}`);
+                
+                let delBtn = document.createElement('input');
+                delBtn.type = 'button';
+                delBtn.style = 'width : 70px ; font-weight:bold'
+                delBtn.value = 'DELETE'
+
+                li.appendChild(text);
+                li.appendChild(delBtn);
+                ul1.appendChild(li);
+
+                delBtn.addEventListener("click",()=>{
+                    axios.delete(`https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage/${obj._id}`)
+                    .then((res)=>{
+                        console.log(res);
+                    }).catch((err)=>{
+                        console.log(err);
+                    })
+                    ul3.removeChild(li);
+                });
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js"></script>
+</body>
+</html>
