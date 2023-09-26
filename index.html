@@ -19,7 +19,7 @@
   <option>Food Items</option>
   <option>Skincare Items</option>
 </select>
-<input type="submit" value="ADD PRODUCT" style="font-weight: bold;">
+<input type="submit" value="ADD PRODUCT" style="font-weight: bold; color:bisque; background-color:crimson; height: 32px;border-radius: 10px; border-color:chartreuse;">
     </form>
     <h3 style="color: red;">Products</h3>
     <h4>Electronic Items</h4>
@@ -43,7 +43,7 @@
             }
 
             localStorage.setItem(productName,JSON.stringify(obj));
-            axios.post('https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage',obj)
+            axios.post('https://crudcrud.com/api/b69a1c0918d641ae83c28bbf36a18b87/AdminPage',obj)
             .then((res)=>{
                 console.log(res);
             }).catch((err)=>{
@@ -54,7 +54,7 @@
         }
 
         window.addEventListener("DOMContentLoaded",()=>{
-            axios.get('https://crudcrud.com/api/36f056cb78284c82965c5f10e942a02d/adminPage')
+            axios.get('https://crudcrud.com/api/b69a1c0918d641ae83c28bbf36a18b87/AdminPage')
             .then((res)=>{
                 for(let i=0;i<res.data.length;i++){
                     showOnScreen(res.data[i]);
@@ -70,8 +70,8 @@
 
                 let delBtn = document.createElement('input');
                 delBtn.type = 'button';
-                delBtn.style = 'width : 70px ; font-weight:bold'
-                delBtn.value = 'DELETE'
+                delBtn.style = 'width : 140px ; font-weight:bold ;color:bisque; background-color:crimson; height: 32px;border-radius: 10px; border-color:chartreuse;'
+                delBtn.value = 'DELETE PRODUCT'
 
                 li.appendChild(text);
                 li.appendChild(delBtn);
@@ -94,8 +94,8 @@
                 
                 let delBtn = document.createElement('input');
                 delBtn.type = 'button';
-                delBtn.style = 'width : 70px ; font-weight:bold'
-                delBtn.value = 'DELETE'
+                delBtn.style = 'width : 140px ; font-weight:bold ;color:bisque; background-color:crimson; height: 32px;border-radius: 10px; border-color:chartreuse;'
+                delBtn.value = 'DELETE PRODUCT'
 
                 li.appendChild(text);
                 li.appendChild(delBtn);
@@ -118,8 +118,8 @@
                 
                 let delBtn = document.createElement('input');
                 delBtn.type = 'button';
-                delBtn.style = 'width : 70px ; font-weight:bold'
-                delBtn.value = 'DELETE'
+                delBtn.style = 'width : 140px ; font-weight:bold ;color:bisque; background-color:crimson; height: 32px;border-radius: 10px; border-color:chartreuse;'
+                delBtn.value = 'DELETE PRODUCT'
 
                 li.appendChild(text);
                 li.appendChild(delBtn);
